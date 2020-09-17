@@ -70,12 +70,12 @@ function predictWebcam() {
             var noo = d.getTime();
             mobileDeviceTime.push(noo);
           }
-          if(predictions[n].class != "person" && predictions[n].score > 0.83){
+          if(predictions[n].class != "person"){
             var d = new Date();
             var noo = d.getTime();
             personNotPresentTimeList.push(noo);
           }
-          if(predictions[n].class != "person" && predictions[n].score <= 0.83){
+          if(predictions[n].class == "person" && predictions[n].score <= 0.80){
             var d = new Date();
             var noo = d.getTime();
             personPartiallyPresentTimeList.push(noo);
