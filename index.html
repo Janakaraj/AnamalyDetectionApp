@@ -1,33 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Hello World - TensorFlow.js</title>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Import the webpage's stylesheet -->
-    <link rel="stylesheet" href="/style.css">
-  </head>  
-  <body>
-    <h1>Welcome to the test</h1>
-    <section id="demos" class="invisible">
-        <div id="liveView" class="camView">
-          <button id="webcamButton">Start</button>
-          <video id="webcam" autoplay width="640" height="480"></video>
-          <button id="stopButton">Stop</button>
-        </div>
-      </section>
+
+<head>
+  <title>Hello World - TensorFlow.js</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Import the webpage's stylesheet -->
+  <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+  <h1>Welcome to Questy</h1>
+  <section id="demos" class="invisible">
+    <div id="liveView" class="camView">
+      <button id="webcamButton">Start</button>
+      <video id="webcam" autoplay width="640" height="480"></video>
+      <button id="stopButton">Stop</button>
+    </div>
+  </section>
   <div>
-      <ul id="results">
-      </ul>
+    <ul id="results">
+    </ul>
   </div>
-    <!-- Import TensorFlow.js library -->
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js" type="text/javascript"></script>
-    <!-- *** Import tfjs-vis - optional *** -->
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-vis/dist/tfjs-vis.umd.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"></script>
-    
-    <!-- Import the page's JavaScript to do some stuff -->
-    <script src="/script.js" defer></script>
-  </body>
+  <!-- Import TensorFlow.js library -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js" type="text/javascript"></script>
+
+  <!-- *** Import tfjs-vis - optional *** -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-vis/dist/tfjs-vis.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/blazeface"></script>
+
+  <!-- Import the page's JavaScript to do some stuff -->
+  <script src="/script.js" defer></script>
+</body>
+
 </html>
