@@ -13,6 +13,7 @@ var personNotPresentTimeList = [];
 var personPartiallyPresentTimeList = [];
 var faceCoveredTimeList = [];
 var faceDetectedTimeList=[];
+var multipleUserTimeList=[];
 var faceCoverCounter =0;
 function getUserMediaSupported() {
   return !!(navigator.mediaDevices &&
@@ -163,6 +164,16 @@ function faceCoveredCounter(list){
     }
   }
 }
+function getDuplicateArrayElements(arr){
+  var sorted_arr = arr.slice().sort();
+  var results = [];
+  for (var i = 0; i < sorted_arr.length - 1; i++) {
+      if (sorted_arr[i + 1] === sorted_arr[i]) {
+          results.push(sorted_arr[i]);
+      }
+  }
+  return results;
+}
 function stopCam() {
   window.cancelAnimationFrame(reqId);
   liveView.classList.add('removed');
@@ -173,7 +184,9 @@ function stopCam() {
   var userNotPresentFor = calulateTotalTime.apply(null, personNotPresentTimeList);
   var userPartiallyPresentFor = calulateTotalTime.apply(null, personPartiallyPresentTimeList);
   findCommonTime(faceDetectedTimeList, personPresentTimeList);
-  addResultToHtml(cellPhoneDetectedFor, userNotPresentFor, userPartiallyPresentFor, faceCoverCounter);
+  multipleUserTimeList = getDuplicateArrayElements(personPresentTimeList);
+  var multipleUserPresentFor = calulateTotalTime.apply(null, multipleUserTimeList);
+  addResultToHtml(cellPhoneDetectedFor, userNotPresentFor, userPartiallyPresentFor, multipleUserPresentFor, faceCoverCounter);
 }
 function calulateTotalTime() {
   var list = [];
@@ -197,7 +210,10 @@ function calulateTotalTime() {
   }
   return totalTime / 1000;
 }
-function addResultToHtml(a, b, c, d) {
+function addResultToHtml(a, b, c, d,e) {
+  var li = document.createElement('li');
+  li.innerText = "Results";
+  results.appendChild(li);
   var li = document.createElement('li');
   li.innerText = "CellPhone and other electronic devices were detected for " + a + " seconds";
   results.appendChild(li);
@@ -208,6 +224,9 @@ function addResultToHtml(a, b, c, d) {
   li.innerText = "User was partially present for " + c + " seconds out of the total test time";
   results.appendChild(li);
   var li = document.createElement('li');
-  li.innerText = "User covered his face " + d + " times";
+  li.innerText = "Multiple users detected for " + d + " seconds out of the total test time";
+  results.appendChild(li);
+  var li = document.createElement('li');
+  li.innerText = "User covered his face " + e + " times";
   results.appendChild(li);
 }
