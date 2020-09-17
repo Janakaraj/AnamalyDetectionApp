@@ -4,6 +4,8 @@ const demosSection = document.getElementById('demos');
 const enableWebcamButton = document.getElementById('webcamButton');
 const stopButton = document.getElementById('stopButton');
 const results = document.getElementById('results');
+const status = document.getElementById('status');
+const buttons = document.getElementById('buttons');
 var reqId;
 var startTime;
 var endTime;
@@ -34,7 +36,8 @@ function enableCam(event) {
     return;
   }
   // Hide the button once clicked.
-  event.target.classList.add('removed');
+  enableWebcamButton.disabled =true;
+  stopButton.disabled=false;
 
   // getUsermedia parameters to force video but not audio.
   const constraints = {
@@ -48,6 +51,8 @@ function enableCam(event) {
   });
   var startDate = new Date();
   startTime = startDate.getTime();
+  demosSection.classList.remove('removed');
+  status.classList.add('removed');
 }
 // script tag import so ignore any warning in Glitch.
 blazeface.load().then(function (loadedmodel) {
@@ -58,7 +63,7 @@ cocoSsd.load().then(function (loadedModel) {
   odmodel = loadedModel;
   console.log("Coco-ssd model loaded");
   // Show demo section now model is ready to use.
-  demosSection.classList.remove('invisible');
+ status.innerText ="Model loaded successfully. Click start to continue."
 });
 
 var children = [];
@@ -182,8 +187,9 @@ function stopCam() {
   endTime = endDate.getTime();
   totalTime = (endTime - startTime) / 1000;
   var cellPhoneDetectedFor = calulateTotalTime.apply(null, mobileDeviceTime);
-  var userNotPresentFor = parseFloat(totalTime - (calulateTotalTime.apply(null, personPresentTimeList)));
+  var userNotPresentFor = parseFloat(totalTime - (calulateTotalTime.apply(null, personPresentTimeList))).toFixed(3);
   var userPartiallyPresentFor = calulateTotalTime.apply(null, personPartiallyPresentTimeList);
+  buttons.classList.add('removed');
   findCommonTime(faceDetectedTimeList, personPresentTimeList);
   multipleUserTimeList = getDuplicateArrayElements(personPresentTimeList);
   var multipleUserPresentFor = calulateTotalTime.apply(null, multipleUserTimeList);
