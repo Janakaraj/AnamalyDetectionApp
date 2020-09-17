@@ -3,11 +3,13 @@ const liveView = document.getElementById('liveView');
 const demosSection = document.getElementById('demos');
 const enableWebcamButton = document.getElementById('webcamButton');
 const stopButton = document.getElementById('stopButton');
-const cellcounter = document.getElementById('cellPhoneCounter');
+const results = document.getElementById('results');
 var reqId;
 
 
 var mobileDeviceTime=[];
+var personNotPresentTimeList=[];
+var personPartiallyPresentTimeList=[];
 function getUserMediaSupported() {
     return !!(navigator.mediaDevices &&
       navigator.mediaDevices.getUserMedia);
@@ -68,6 +70,16 @@ function predictWebcam() {
             var noo = d.getTime();
             mobileDeviceTime.push(noo);
           }
+          if(predictions[n].class != "person" && predictions[n].score > 0.83){
+            var d = new Date();
+            var noo = d.getTime();
+            personNotPresentTimeList.push(noo);
+          }
+          if(predictions[n].class != "person" && predictions[n].score <= 0.83){
+            var d = new Date();
+            var noo = d.getTime();
+            personPartiallyPresentTimeList.push(noo);
+          }
         const p = document.createElement('p');
         p.innerText = predictions[n].class  + ' - with ' 
             + Math.round(parseFloat(predictions[n].score) * 100) 
@@ -100,7 +112,10 @@ function stopCam(){
     video.srcObject.getTracks().forEach(function(track) {
         track.stop();
       });
-      calulateTotalTime.apply(null,mobileDeviceTime);
+      var cellPhoneDetectedFor = calulateTotalTime.apply(null,mobileDeviceTime);
+      var userNotPresentFor = calulateTotalTime.apply(null,personNotPresentTimeList);
+      var userPartiallyPresentFor = calulateTotalTime.apply(null,personPartiallyPresentTimeList);
+      addResultToHtml(cellPhoneDetectedFor, userNotPresentFor, userPartiallyPresentFor);
 }
 function calulateTotalTime(){
     var list=[];
@@ -123,6 +138,16 @@ function calulateTotalTime(){
             tempI=list[i+1];
         }
     }
-    cellcounter.innerText=totalTime/1000;
-    console.log(totalTime/1000);
+    return totalTime/1000;
+}
+function addResultToHtml(a, b, c){
+var li = document.createElement('li');
+li.innerText = "CellPhone was detected for "+a+" seconds";
+results.appendChild(li);
+var li = document.createElement('li');
+li.innerText = "User was not present for "+b+" seconds";
+results.appendChild(li);
+var li = document.createElement('li');
+li.innerText = "User was partially present for "+c+" seconds";
+results.appendChild(li);
 }
