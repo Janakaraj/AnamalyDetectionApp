@@ -36,8 +36,8 @@ function enableCam(event) {
     return;
   }
   // Hide the button once clicked.
-  enableWebcamButton.disabled =true;
-  stopButton.disabled=false;
+  enableWebcamButton.disabled = true;
+  stopButton.disabled = false;
 
   // getUsermedia parameters to force video but not audio.
   const constraints = {
@@ -63,7 +63,7 @@ cocoSsd.load().then(function (loadedModel) {
   odmodel = loadedModel;
   console.log("Coco-ssd model loaded");
   // Show demo section now model is ready to use.
- status.innerText ="Model loaded successfully. Click start to continue."
+  status.innerText = "Model loaded successfully. Click start to continue."
 });
 
 var children = [];
@@ -157,7 +157,7 @@ function faceCoveredCounter(list) {
   var forward = list[0];
   var tempI = list[0];
   for (var i = 0; i < list.length; i++) {
-    if (list[i + 1] - list[i] <= 1000) {
+    if (list[i + 1] - list[i] <= 700) {
       forward = list[i + 1];
     }
     else {
@@ -245,6 +245,6 @@ function addResultToHtml(a, b, c, d, e) {
   li.innerText = "Multiple users detected for " + d + " " + formate + " out of " + totalTime + " " + formate + " of the total test time";
   results.appendChild(li);
   var li = document.createElement('li');
-  li.innerText = "User covered his face " + e + " times";
+  li.innerText = "User covered his face " + (e - 1) + " times";
   results.appendChild(li);
 }
