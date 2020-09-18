@@ -18,6 +18,7 @@ var faceCoveredTimeList = [];
 var faceDetectedTimeList = [];
 var multipleUserTimeList = [];
 var faceCoverCounter = 0;
+var i=0;
 function getUserMediaSupported() {
   return !!(navigator.mediaDevices &&
     navigator.mediaDevices.getUserMedia);
@@ -48,8 +49,7 @@ function enableCam(event) {
   navigator.mediaDevices.getUserMedia(constraints).then(function (stream) {
     video.srcObject = stream;
     video.addEventListener('loadeddata', predictWebcam);
-    var startDate = new Date();
-    startTime = startDate.getTime();
+    
   });
 
   demosSection.classList.remove('removed');
@@ -70,6 +70,7 @@ cocoSsd.load().then(function (loadedModel) {
 var children = [];
 
 function predictWebcam() {
+  
   // Now let's start classifying a frame in the stream.
   odmodel.detect(video).then(function (predictions) {
     // Remove any highlighting we did previous frame.
@@ -126,6 +127,11 @@ function predictWebcam() {
         children.push(p);
       }
     }
+    if(i==0){
+      var startDate = new Date();
+      startTime = startDate.getTime();
+    }
+    i++;
     // Call this function again to keep predicting when the browser is ready.
     reqId = window.requestAnimationFrame(predictWebcam);
   });
