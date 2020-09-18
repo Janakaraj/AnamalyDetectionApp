@@ -98,7 +98,8 @@ function predictWebcam() {
           personPresentTimeList.push(noo);
         }
 
-        if (predictions[n].class == "person" && predictions[n].score <= 0.75) {
+        if (predictions[n].class == "person" && predictions[n].score <= 0.75
+          && (predictions[n].bbox[0] < 0.2 || predictions[n].bbox[1] < 0.2 || predictions[n].bbox[2] > 0.8 || predictions[n].bbox[3] > 0.8)) {
           var d = new Date();
           var noo = d.getTime();
           personPartiallyPresentTimeList.push(noo);
