@@ -235,18 +235,18 @@ function addResultToHtml(a, b, c, d, e) {
   li.innerText = "Results";
   results.appendChild(li);
   var li = document.createElement('li');
-  li.innerText = "CellPhone and other electronic devices were detected for " + a + " " + formate;
+  li.innerText = " Anomaly 1 : CellPhone and other electronic devices were detected for " + a + " " + formate;
   results.appendChild(li);
   var li = document.createElement('li');
-  li.innerText = "User was not present for " + b + " " + formate + " out of " + totalTime + " " + formate + " of the total test time";
+  li.innerText = " Anomaly 2 : User was not present for " + b + " " + formate + " out of " + totalTime + " " + formate + " of the total test time";
   results.appendChild(li);
   var li = document.createElement('li');
-  li.innerText = "User was partially present for " + c + " " + formate + " out of " + totalTime + " " + formate + " of the total test time";
+  li.innerText = " Anomaly 3 : User was partially present for " + c + " " + formate + " out of " + totalTime + " " + formate + " of the total test time";
   results.appendChild(li);
   var li = document.createElement('li');
-  li.innerText = "Multiple users detected for " + d + " " + formate + " out of " + totalTime + " " + formate + " of the total test time";
+  li.innerText = " Anomaly 4 : Multiple users detected for " + d + " " + formate + " out of " + totalTime + " " + formate + " of the total test time";
   results.appendChild(li);
   var li = document.createElement('li');
-  li.innerText = "User covered his face " + (e - 1) + " times";
+  li.innerText = " Anomaly 5 : User covered his face " + (e - 1) + " times";
   results.appendChild(li);
 }
